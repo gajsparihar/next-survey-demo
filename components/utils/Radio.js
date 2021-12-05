@@ -1,4 +1,7 @@
-export default function Radio({ value, text, name, selected, onClick }) {
+import React from "react";
+import PropTypes from "prop-types";
+
+function Radio({ value, text, name, selected, onClick }) {
   return (
     <label
       htmlFor={value}
@@ -12,9 +15,19 @@ export default function Radio({ value, text, name, selected, onClick }) {
         name={name}
         id={value}
         value={value}
-        onClick={() => onClick(value)}
+        onClick={() => onClick({ key: value, value: text })}
       />{" "}
       {text}
     </label>
   );
 }
+
+Radio.propTypes = {
+  value: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  selected: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+
+export default React.memo(Radio);

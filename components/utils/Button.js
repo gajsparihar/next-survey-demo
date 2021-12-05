@@ -1,7 +1,10 @@
-export default function Button({ onClick, children, ...rest }) {
+import React from "react";
+import PropTypes from "prop-types";
+
+function Button({ onClick, children, className, ...rest }) {
   return (
     <button
-      className="float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2"
+      className={`bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2 ${className}`}
       onClick={onClick}
       {...rest}
     >
@@ -9,3 +12,11 @@ export default function Button({ onClick, children, ...rest }) {
     </button>
   );
 }
+
+Button.propTypes = {
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
+};
+
+export default React.memo(Button);
